@@ -11,3 +11,26 @@
 	<br>
 	<span>Result: <strong>{{QrScanner.qrResult}}</strong></span>
 </div>
+<div class="container">
+  <form class="form" [formGroup]="depotForm" (ngSubmit)='operatorUpdate (depotForm.value)' >
+    <div class="form-group">
+      <label>recorded weight:</label>
+      <input formControlName="weight_recorded" class="form-control" name="weight_recorded" placeholder="Type of Commodity" type="number">
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary">create token</button>
+    </div>
+  </form>
+  </div>
+  <div *ngIf= "datacode!=null">
+    <div class="modal-body">
+      <div class="form-group">
+        <p>data code </p>
+        <qr-code [value]='datacode' [size]="150"></qr-code>
+      </div>
+      <div class="form-group">
+        <p>pass code</p>
+        <qr-code [value]='qrcode' [size]="150"></qr-code>
+      </div>
+    </div>
+  </div>

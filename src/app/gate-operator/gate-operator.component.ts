@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { QrscannerService } from '../services/qrscanner.service';
 
 @Component({
   selector: 'app-gate-operator',
@@ -8,11 +9,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class GateOperatorComponent implements OnInit {
   placeOrderForm: FormGroup;
-  private prime = 2;
-  private secret = 199;
   public datacode = null;
   public qrcode = null;
-  constructor() { }
+  constructor(public QrScanner: QrscannerService) { }
 
   ngOnInit() {
     this.placeOrderForm = new FormGroup({
@@ -26,7 +25,7 @@ export class GateOperatorComponent implements OnInit {
   public createToken(data) {
     console.log(data);
    this.datacode = JSON.stringify(data);
-   const primeString = this.prime * this.secret;
+   const primeString = this.QrScanner.config['gate-key'] * this.QrScanner.config['private-key'];
    this.qrcode = String(primeString);
   }
 }

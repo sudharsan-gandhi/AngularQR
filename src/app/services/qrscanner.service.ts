@@ -6,7 +6,15 @@ export class QrscannerService {
     qrResult: string;
     selectedDevice: any;
     availableDevices: object = [];
-  constructor() { }
+    config = {
+      'private-key': 199,
+      'gate-key': 2,
+      'depot-op-key': 3,
+      'quality-key': 5
+    };
+  constructor() {
+    this.qrResult = '';
+   }
   displayCameras(cameras: object[]) {
 
     console.log('Devices: ', cameras);
@@ -22,10 +30,10 @@ export class QrscannerService {
 handleQrCodeResult(result: string) {
 
   console.log('Result: ', result);
-  if (this.cameraStarted) {
     this.qrResult = result;
-  }
-
+    if (this.qrResult !== undefined ) {
+      this.reset();
+    }
 }
 
 onChange(selectedValue) {

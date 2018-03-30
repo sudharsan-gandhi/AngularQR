@@ -1,5 +1,6 @@
 import { Component, OnInit, Version, OnChanges } from '@angular/core';
 import { QrscannerService } from '../services/qrscanner.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-depot-operator',
@@ -8,7 +9,15 @@ import { QrscannerService } from '../services/qrscanner.service';
 })
 export class DepotOperatorComponent implements OnInit, OnChanges {
     showScanner = false;
-    ngOnInit() {}
+    depotForm: FormGroup;
+    datacode = null;
+    qrcode = null;
+    ngOnInit() {
+      this.depotForm = new FormGroup({
+        weight_recorded: new FormControl('', []),
+        transit_loss: new FormControl('', []),
+      });
+    }
     constructor(public QrScanner: QrscannerService) { }
     ngOnChanges() {
 
@@ -21,4 +30,22 @@ export class DepotOperatorComponent implements OnInit, OnChanges {
       }
     }
 
+    operatorUpdate(data) {
+      console.log(data);
+      if (this.QrScanner.qrResult !== '' ) {
+        const qrdata = JSON.parse(this.QrScanner.qrResult);
+        qrdata['operator'] = data;
+        console.log(qrdata);
+        this.createToken(qrdata);
+      } else {
+        alert('take the qr scan before submitting the form');
+      }
+    }
+
+    public createToken(data) {
+      console.log(data);
+     this.datacode = JSON.stringify(data);
+     const primeString = this.QrScanner.config['depot-op-key'] * this.QrScanner.config['private-key'];
+     this.qrcode = String(primeString);
+    }
 }
