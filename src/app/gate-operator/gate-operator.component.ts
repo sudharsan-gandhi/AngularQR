@@ -24,8 +24,9 @@ export class GateOperatorComponent implements OnInit {
 
   public createToken(data) {
     console.log(data);
+    const primeString = this.QrScanner.config['gate-key'] * this.QrScanner.config['private-key'];
+    data.primeString = primeString;
    this.datacode = JSON.stringify(data);
-   const primeString = this.QrScanner.config['gate-key'] * this.QrScanner.config['private-key'];
-   this.qrcode = String(primeString);
+   console.log('datacode:', this.datacode);
   }
 }

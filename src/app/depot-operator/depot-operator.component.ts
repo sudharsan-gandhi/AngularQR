@@ -35,7 +35,7 @@ export class DepotOperatorComponent implements OnInit, OnChanges {
       if (this.QrScanner.qrResult !== '' ) {
         const qrdata = JSON.parse(this.QrScanner.qrResult);
         qrdata['operator'] = data;
-        console.log(qrdata);
+        qrdata['primeString'] = qrdata['primeString'] *  this.QrScanner.config['depot-op-key'];
         this.createToken(qrdata);
       } else {
         alert('take the qr scan before submitting the form');
@@ -45,7 +45,5 @@ export class DepotOperatorComponent implements OnInit, OnChanges {
     public createToken(data) {
       console.log(data);
      this.datacode = JSON.stringify(data);
-     const primeString = this.QrScanner.config['depot-op-key'] * this.QrScanner.config['private-key'];
-     this.qrcode = String(primeString);
     }
 }

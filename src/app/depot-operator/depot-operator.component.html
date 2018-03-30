@@ -23,14 +23,8 @@
   </form>
   </div>
   <div *ngIf= "datacode!=null">
-    <div class="modal-body">
       <div class="form-group">
         <p>data code </p>
         <qr-code [value]='datacode' [size]="150"></qr-code>
       </div>
-      <div class="form-group">
-        <p>pass code</p>
-        <qr-code [value]='qrcode' [size]="150"></qr-code>
-      </div>
-    </div>
   </div>
