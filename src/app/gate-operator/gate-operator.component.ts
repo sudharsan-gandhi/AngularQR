@@ -19,8 +19,7 @@ export class GateOperatorComponent implements OnInit {
       type_of_commodity: new FormControl('', []),
       total_weight: new FormControl('', []),
       vehicle_number: new FormControl('', []),
-      miller: new FormControl('', []),
-      total_cost: new FormControl('', []),
+      miller: new FormControl('', [])
     });
   }
 

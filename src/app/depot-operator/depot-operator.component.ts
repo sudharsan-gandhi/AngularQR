@@ -1,42 +1,24 @@
-import { Component, OnInit, Version } from '@angular/core';
+import { Component, OnInit, Version, OnChanges } from '@angular/core';
+import { QrscannerService } from '../services/qrscanner.service';
 
 @Component({
   selector: 'app-depot-operator',
   templateUrl: './depot-operator.component.html',
   styleUrls: ['./depot-operator.component.css']
 })
-export class DepotOperatorComponent implements OnInit {
-    cameraStarted = false;
-    qrResult: string;
-    selectedDevice: any;
-    availableDevices: object = [];
+export class DepotOperatorComponent implements OnInit, OnChanges {
+    showScanner = false;
     ngOnInit() {}
-    displayCameras(cameras: object[]) {
+    constructor(public QrScanner: QrscannerService) { }
+    ngOnChanges() {
 
-        console.log('Devices: ', cameras);
-
-        this.availableDevices = cameras;
-
-        if (cameras && cameras.length > 0) {
-            this.selectedDevice = cameras[0];
-            this.cameraStarted = true;
-        }
     }
-
-    handleQrCodeResult(result: string) {
-
-        console.log('Result: ', result);
-
-        this.qrResult = result;
-    }
-
-    onChange(selectedValue) {
-
-        console.log('Selection changed: ', selectedValue);
-
-        this.cameraStarted = false;
-        this.selectedDevice = selectedValue;
-        this.cameraStarted = true;
+    toggleScan() {
+      this.showScanner = !this.showScanner;
+      if (!this.showScanner) {
+        console.log('in');
+        this.QrScanner.reset();
+      }
     }
 
 }

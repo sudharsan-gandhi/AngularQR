@@ -7,6 +7,8 @@ import { RoutingModule } from './routing/routing.module';
 import { DepotOperatorComponent } from './depot-operator/depot-operator.component';
 import { QRCodeModule } from 'angular2-qrcode';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { QrscannerService } from './services/qrscanner.service';
+
 
 
 
@@ -24,7 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [QrscannerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
