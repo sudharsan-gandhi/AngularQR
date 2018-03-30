@@ -1,0 +1,35 @@
+<div class="container">
+  <form class="form" [formGroup]="placeOrderForm" (ngSubmit)='createToken (placeOrderForm.value)' >
+    <div class="form-group">
+      <label>commodity</label>
+      <input formControlName="type_of_commodity" class="form-control" name="type_of_commodity" placeholder="Type of Commodity" type="text">
+    </div>
+    <div class="form-group">
+    <label>total weight(in tonnes)</label>
+    <input type="number" formControlName="total_weight" name="total_weight" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>truck number</label>
+    <input type="text" formControlName="vehicle_number" name="vehicle_number" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>miller</label>
+    <input type="text" name="miller" formControlName="miller" class="form-control">
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary">create token</button>
+    </div>
+  </form>
+  </div>
+  <div *ngIf= "datacode!=null">
+    <div class="modal-body">
+      <div class="">
+        <p>data code </p>
+        <qr-code [value]='datacode' [size]="150"></qr-code>
+      </div>
+      <div class="form-group">
+        <p>pass code</p>
+        <qr-code [value]='qrcode' [size]="150"></qr-code>
+      </div>
+    </div>
+  </div>
