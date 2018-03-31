@@ -1,0 +1,78 @@
+<ul class="nav nav-pills justify-content-md-center">
+  <li class="nav-item">
+    <a class="nav-link " routerLink="/login">Login</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" routerLink="/signup">Sign Up</a>
+  </li>
+</ul>
+
+<br>
+
+
+
+<div class="container align-items-center">
+  <div class="alert alert-primary" role="alert">
+    Please fill the Sign Up form
+  </div>
+  <form class="col-8" [formGroup]="signupForm" (ngSubmit)='signup(signupForm.value)'>
+    <div *ngIf="errorMessage" class="alert-danger">
+      {{errorMessage}}
+      <br>
+    </div>
+    <div class="form-group">
+      <input type="email" name="email" formControlName="email" class="form-control " id="email" aria-describedby="emailHelp" placeholder="Enter email">
+      <div *ngIf="signupForm.controls['email'].hasError('required') && signupForm.controls['email'].dirty" signup class="alert-danger">
+        Please enter your email id..!
+      </div>
+      <div *ngIf="signupForm.controls['email'].hasError('pattern') && signupForm.controls['email'].dirty" signup class="alert-danger">
+        Please enter your valid email id..!
+      </div>
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <input type="text" name="first_name" formControlName="first_name" class="form-control" id="first_name" placeholder="first name">
+      <div *ngIf="signupForm.controls['first_name'].hasError('required') && signupForm.controls['first_name'].dirty" class="alert-danger">
+        First Name should not be empty....
+      </div>
+      <div *ngIf="signupForm.controls['first_name'].hasError('minlength') && signupForm.controls['first_name'].dirty" class="alert-danger">
+        First Name should be minlength of 5 characters
+      </div>
+      <div *ngIf="signupForm.controls['first_name'].hasError('maxlength') && signupForm.controls['first_name'].dirty" class="alert-danger">
+        First Name should be maxlength of 100 characters
+      </div>
+      <div *ngIf="signupForm.controls['first_name'].hasError('pattern') && signupForm.controls['first_name'].dirty" class="alert-danger">
+        First Name should contain only String spaces and dot
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" name="middle_name" formControlName="middle_name" class="form-control" id="middle_name" placeholder="middle name">
+      <div *ngIf="signupForm.controls['middle_name'].hasError('pattern') && signupForm.controls['middle_name'].dirty" class="alert-danger">
+        Middle Name should contain only String spaces and dot
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" name="last_name" formControlName="last_name" class="form-control" id="last_name" placeholder="last name">
+      <div *ngIf="signupForm.controls['last_name'].hasError('required') && signupForm.controls['last_name'].dirty" class="alert-danger">
+        Last Name should not be empty....
+      </div>
+      <div *ngIf="signupForm.controls['last_name'].hasError('pattern') && signupForm.controls['last_name'].dirty" class="alert-danger">
+        Last Name should contain only String spaces and dot
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="password" name="password" formControlName="password" class="form-control" id="password" placeholder="Password">
+      <div *ngIf="signupForm.controls['password'].hasError('required') && signupForm.controls['password'].dirty" class="alert-danger">
+        Password should not be empty
+      </div>
+      <div *ngIf="signupForm.controls['password'].hasError('pattern')" class="alert-danger">
+        <div>
+          -8 characters in length. -At least 1 special -At least 1 digit -At least 1 upper -At least 1 lower
+        </div>
+      </div>
+    </div>
+    <button type="submit" [disabled]="!signupForm.valid" class="btn btn-primary">Sign up</button>
+  </form>
+
+</div>

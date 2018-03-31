@@ -1,0 +1,45 @@
+<br>
+<br>
+<br>
+
+<div *ngIf="millerId !== undefined && millerId !== null && doc !== undefined && doc !==null ">
+<div style=" padding-left: 40%;" *ngIf="datacode!=null" class="mx-auto">
+  <div class="form-group">
+    <br>
+    <br>
+    <h4>Gate Token </h4>
+    <qr-code class="mx-auto" style="cursor: pointer;" [value]='datacode' [size]="200" (click)="getImage($event , doc)"></qr-code>
+  </div>
+</div>
+<div >
+  <!--Panel-->
+  <div class="card col-10 mx-auto">
+    <h3 class="card-header primary-color white-text">Miller Details</h3>
+    <div class="card-body">
+      <h5 class="card-title">Miller Id -
+        <span>{{ doc._id }}</span>
+      </h5>
+      <h5 class="card-title">Mode of Transport -
+        <span>{{ doc.mode_of_transport }}</span>
+      </h5>
+      <h5 class="card-title">Type of Commodity -
+        <span>{{ doc.type_of_commodity }}</span>
+      </h5>
+      <h5 class="card-title">Total Weight -
+        <span>{{ doc.total_weight }}</span>
+      </h5>
+      <h5 class="card-title">Total Cost -
+        <span>{{ doc.total_cost }}</span>
+      </h5>
+      <h5 class="card-title">Total Bags -
+        <span>{{ doc.total_number_of_bags }}</span>
+      </h5>
+      <h5 class="card-title">Status -
+        <span>{{ doc.status }}</span>
+      </h5>
+
+    </div>
+  </div>
+  <!--/.Panel-->
+</div>
+</div>

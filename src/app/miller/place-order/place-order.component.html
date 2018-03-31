@@ -1,0 +1,72 @@
+<br>
+<br>
+<br>
+<br>
+<div *ngIf="success === 'true'" class='alert alert-success'>
+    Successfully logged in
+  </div>
+  <div *ngIf="placeOrderSuccess === true" class='alert alert-success'>
+      Your order has been placed
+    </div>
+<br>
+<div class="container col-md-6 mx-auto">
+  <!-- Card -->
+  <div class="card  ">
+
+    <!-- Card body -->
+    <div class="card-body col-md-11">
+
+      <form [formGroup]="placeOrderForm" (ngSubmit)='placeorder(placeOrderForm.value)'>
+        <p class="h5 text-center mb-4">Place Order</p>
+
+        <div class="example-container col-12 ">
+          <mat-form-field class="col-12">
+            <mat-select formControlName="type_of_commodity" name="type_of_commodity" placeholder="Type of Commodity">
+              <mat-option value="Raw-Rice">Raw-Rice</mat-option>
+              <mat-option value="Cotton">Cotton</mat-option>
+              <mat-option value="Wheat">Wheat</mat-option>
+              <mat-option value="Grains">Grains</mat-option>
+            </mat-select>
+            <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="md-form">
+
+          <input type="text" formControlName="total_weight" id="total_weight" name="total_weight" class="form-control" mdbActive>
+          <label for="total_weight">Total Weight</label>
+        </div>
+
+        <div class="md-form">
+
+          <input type="text" formControlName="total_number_of_bags" name="total_number_of_bags" id="total_number_of_bags" class="form-control"
+            mdbActive>
+          <label for="total_number_of_bags">Total number of bags</label>
+        </div>
+        <div class="example-container col-12 ">
+          <mat-form-field class="col-12">
+            <mat-select placeholder="Mode of Transport" formControlName="mode_of_transport" name="mode_of_transport">
+              <mat-option value="Truck">Truck</mat-option>
+              <mat-option value="Train">Train</mat-option>
+            </mat-select>
+            <mat-hint align="end">                                               Here's the dropdown arrow ^</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="md-form">
+
+          <input type="text" formControlName="total_cost" name="total_cost" id="total_cost" class="form-control" mdbActive>
+          <label for="total_cost">Total Cost</label>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-default waves-light" mdbRippleRadius>Request</button>
+        </div>
+      </form>
+
+      <!-- Material form register -->
+
+    </div>
+    <!-- Card body -->
+
+  </div>
+  <!-- Card -->
+</div>

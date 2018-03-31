@@ -1,0 +1,57 @@
+<br>
+<br>
+<br>
+<br>
+
+<div *ngIf="success === 'true'" class='alert alert-success'>
+  Successfully logged in
+</div>
+<br>
+<div class="col-10 center mx-auto" *ngIf="shedPercentage !== undefined && shed !== undefined">
+  <mat-progress-bar mode="determinate" color="primary" value="{{shedPercentage}}" class="shed-availability-status  "></mat-progress-bar>
+  <span>Allocated : {{ shed.allotedSheds }}</span>
+  <span class="float-right">Total : {{ shed.numberOfSheds }}</span>
+</div>
+
+<br>
+<br>
+<div *ngIf = "docs.length === 0" class='alert alert-success'>No new request has been made</div>
+<div *ngFor="let doc of docs">
+  <!--Panel-->
+  <div class="container col-md-3 float-left">
+    <div class="card">
+      <h4 class="card-header primary-color white-text">
+        <b>ID - </b> {{doc._id}}</h4>
+      <div class="card-body">
+        <!-- <h4 class="card-title">Special title treatment</h4> -->
+        <div>
+          <h5>
+            <b>Type of Commodity : </b> {{ doc.type_of_commodity }}</h5>
+        </div>
+        <div>
+          <h5>
+            <b>Total Weight : </b> {{ doc.total_weight }}</h5>
+        </div>
+        <div>
+          <h5>
+            <b>Total No of Bags : </b> {{ doc.total_number_of_bags }}</h5>
+        </div>
+        <div>
+          <h5>
+            <b>Mode of Transport : </b> {{ doc.mode_of_transport }}</h5>
+        </div>
+        <div>
+          <h5>
+            <b>Total Cost : </b> {{ doc.total_cost }}</h5>
+        </div>
+        <div>
+          <h5>
+            <b>Status : </b> {{ doc.status }}</h5>
+        </div>
+        <button class="btn btn-success waves-light" (click)="accept(doc)" *ngIf="doc.status != 'accepted'" mdbRippleRadius>Accept</button>
+        <button class="btn btn-danger waves-light" *ngIf="doc.status != 'rejected' " (click)="decline(doc)" mdbRippleRadius>Decline </button>
+      </div>
+    </div>
+  </div>
+  <!--/.Panel-->
+</div>

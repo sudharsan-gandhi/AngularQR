@@ -1,0 +1,152 @@
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+  <div class="text-center">
+    <button class='btn btn-large btn-primary ' (click)='toggleScan()'>
+      show/hide qr scanner
+    </button>
+  </div>
+</div>
+<div *ngIf='showScanner' class='container' width="300" height="200">
+  <select (change)="QrScanner.onChange($event.target.value)">
+    <option *ngFor="let device of QrScanner.availableDevices" [value]="device.deviceId">{{ device.label }}</option>
+  </select>
+  <br>
+  <ngx-zxing [start]="QrScanner.cameraStarted" [device]="QrScanner.selectedDevice" (onCamsFound)="QrScanner.displayCameras($event)"
+    (onScan)="handleQrCodeResult($event)"></ngx-zxing>
+  <br>
+  <span>Qr Data:
+    <strong>{{QrScanner.qrResult}}</strong>
+  </span>
+</div>
+
+<br>
+
+<div *ngIf="success === 'true'" class='alert alert-success'>
+  Successfully logged in
+</div>
+<br>
+
+<div>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+
+        <th>Request Id</th>
+        <th>Type of Commodity</th>
+        <th>Number of Bags</th>
+        <th>Total Weight</th>
+        <th>Mode of Transport</th>
+        <th>Total Cost</th>
+        <th>Weight</th>
+        <th>Measured Weight</th>
+        <th>Transit Loss</th>
+        <th>Token</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doc of docs">
+        <th>{{ doc._id }}</th>
+        <td>{{ doc.type_of_commodity }}</td>
+        <td>{{ doc.total_number_of_bags }}</td>
+        <td>{{ doc.total_weight }}</td>
+        <td>{{ doc.mode_of_transport }}</td>
+        <td>{{ doc.total_cost }}</td>
+        <td class="btn-padding-0">
+          <button type="button" class="btn btn-primary waves-light " (click)="form.show()" mdbRippleRadius>
+            Enter Weight</button>
+          <!--Modal: Subscription From-->
+          <div mdbModal #form="mdb-modal" class="modal fade" id="modalSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog cascading-modal" role="document">
+              <!--Content-->
+              <div class="modal-content">
+
+                <!--Header-->
+                <div class="modal-header light-blue darken-3 white-text">
+                  <h4 class="title">
+                    <i class="fa fa-newspaper-o"></i>{{ doc._id }} - Measure Weight Details</h4>
+                  <button type="button" class="close waves-effect waves-light" value="doc.measuredWeight" data-dismiss="modal" aria-label="Close"
+                    (click)="form.hide()">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body mb-0">
+
+                  <form action="" [formGroup]="measuredWeightForm" (ngSubmit)="submitMeasuredWeight(measuredWeightForm.value, doc)">
+                    <div class="md-form form-sm">
+                      <i class="fas fa-weight"></i>
+                      <input mdbActive type="text" id="form27" formControlName="measuredWeight" class="form-control" value="{{ doc.measuredWeight }}">
+                      <label for="form27">Total Measured Weight</label>
+                    </div>
+                    <div class="text-center mt-1-half">
+                      <button type="submit" (click)="form.hide()" class="btn btn-info mb-1 waves-light" mdbRippleRadius>Submit
+                        <i class="fa fa-check ml-1"></i>
+                      </button>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+              <!--/.Content-->
+            </div>
+          </div>
+          <!--Modal: Subscription From-->
+        </td>
+        <td>
+          <span *ngIf="doc.measuredWeight === undefined ">Not yet entered</span>
+          <span *ngIf="doc.measuredWeight !== undefined ">{{ doc.measuredWeight }}</span>
+        </td>
+        <td>
+          <span *ngIf="doc.transitLoss === undefined ">Enter Weight to calculate transit loss</span>
+          <span *ngIf="doc.transitLoss !== undefined ">{{ doc.transitLoss }} %</span>
+        </td>
+        <td class="btn-padding-0">
+          <button type="button" class="btn btn-primary waves-light " (click)="form1.show(); createToken(doc)" mdbRippleRadius>
+            Generate Token</button>
+          <!--Modal: Subscription From-->
+          <div mdbModal #form1="mdb-modal" class="modal fade" id="modalToken" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog cascading-modal" role="document">
+              <!--Content-->
+              <div class="modal-content">
+
+                <!--Header-->
+                <div class="modal-header light-blue darken-3 white-text">
+                  <h4 class="title">
+                    <i class="fa fa-newspaper-o"></i>Generated Token</h4>
+                  <button type="button" class="close waves-effect waves-light" value="doc.measuredWeight" data-dismiss="modal" aria-label="Close"
+                    (click)="form1.hide()">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body mb-0 mx-auto">
+                  <div *ngIf="datacode!=null">
+                    <div class="form-group">
+                      <p>data code </p>
+                      <qr-code [value]='datacode' (click)="getImage($event, doc)" style="cursor: pointer;" [size]="150"></qr-code>
+                    </div>
+                  </div>
+                  <div class="text-center mt-1-half">
+                    <button type="submit" (click)="form1.hide()" class="btn btn-info mb-1 waves-light" mdbRippleRadius>OK
+                      <i class="fa fa-check ml-1"></i>
+                    </button>
+                  </div>
+
+
+                </div>
+              </div>
+              <!--/.Content-->
+            </div>
+          </div>
+          <!--Modal: Subscription From-->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

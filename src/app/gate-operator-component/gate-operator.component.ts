@@ -29,4 +29,7 @@ export class GateOperatorComponent implements OnInit {
    this.datacode = JSON.stringify(data);
    console.log('datacode:', this.datacode);
   }
+  public getImage(event) {
+    console.log('event', event);
+  }
 }
