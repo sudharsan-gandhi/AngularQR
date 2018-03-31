@@ -8,6 +8,7 @@ import { DepotOperatorComponent } from './depot-operator/depot-operator.componen
 import { QRCodeModule } from 'angular2-qrcode';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QrscannerService } from './services/qrscanner.service';
+import { TodoComponent } from './todo/todo.component';
 
 
 
@@ -16,7 +17,8 @@ import { QrscannerService } from './services/qrscanner.service';
   declarations: [
     AppComponent,
     GateOperatorComponent,
-    DepotOperatorComponent
+    DepotOperatorComponent,
+    TodoComponent
   ],
   imports: [
     BrowserModule,

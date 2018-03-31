@@ -9,7 +9,7 @@
 	<br>
 	<ngx-zxing [start]="QrScanner.cameraStarted" [device]="QrScanner.selectedDevice" (onCamsFound)="QrScanner.displayCameras($event)" (onScan)="QrScanner.handleQrCodeResult($event)" ></ngx-zxing>
 	<br>
-	<span>Result: <strong>{{QrScanner.qrResult}}</strong></span>
+	<span>Qr Data: <strong>{{QrScanner.qrResult}}</strong></span>
 </div>
 <div class="container">
   <form class="form" [formGroup]="depotForm" (ngSubmit)='operatorUpdate (depotForm.value)' >

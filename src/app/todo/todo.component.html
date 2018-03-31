@@ -1,0 +1,30 @@
+<div id="mySidenav" class="sidenav">
+  <a>Completed</a>
+  <br>
+  <div id="complete">
+    <div *ngIf="QrScanner.complete.length == 0">
+      no complete status. Try rescanning QR.
+    </div>
+    <div *ngIf="QrScanner.complete.length > 0">
+    <ol>
+      <li *ngFor= "let complete of QrScanner.complete">
+        {{complete}}
+      </li>
+    </ol>
+    </div>
+  </div>
+  <a>Pending</a>
+  <br>
+  <div id="incomplete">
+    <div *ngIf="QrScanner.incomplete.length == 0">
+      no incomplete status. Try rescanning QR.
+    </div>
+    <div *ngIf="QrScanner.complete.length > 0">
+    <ol>
+      <li *ngFor= "let incomplete of QrScanner.incomplete">
+        {{incomplete}}
+      </li>
+    </ol>
+    </div>
+  </div>
+</div>
