@@ -2,12 +2,12 @@
   <a>Completed</a>
   <br>
   <div id="complete">
-    <div *ngIf="QrScanner.complete.length == 0">
+    <div class="complete-color" *ngIf="QrScanner.complete.length == 0">
       no complete status. Try rescanning QR.
     </div>
     <div *ngIf="QrScanner.complete.length > 0">
     <ol>
-      <li *ngFor= "let complete of QrScanner.complete">
+      <li  class="complete-color" *ngFor= "let complete of QrScanner.complete">
         {{complete}}
       </li>
     </ol>
@@ -16,12 +16,12 @@
   <a>Pending</a>
   <br>
   <div id="incomplete">
-    <div *ngIf="QrScanner.incomplete.length == 0">
+    <div class="incomplete-color" *ngIf="QrScanner.incomplete.length == 0">
       no incomplete status. Try rescanning QR.
     </div>
     <div *ngIf="QrScanner.complete.length > 0">
     <ol>
-      <li *ngFor= "let incomplete of QrScanner.incomplete">
+      <li class="incomplete-color" *ngFor= "let incomplete of QrScanner.incomplete">
         {{incomplete}}
       </li>
     </ol>

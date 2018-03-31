@@ -1,4 +1,4 @@
-import { Component, OnInit, Version, OnChanges } from '@angular/core';
+import { Component, OnInit, Version, OnChanges, Output } from '@angular/core';
 import { QrscannerService } from '../services/qrscanner.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -8,6 +8,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./depot-operator.component.css']
 })
 export class DepotOperatorComponent implements OnInit, OnChanges {
+
+
     showScanner = false;
     depotForm: FormGroup;
     datacode = null;
@@ -18,6 +20,7 @@ export class DepotOperatorComponent implements OnInit, OnChanges {
         transit_loss: new FormControl('', []),
       });
     }
+
     constructor(public QrScanner: QrscannerService) { }
     ngOnChanges() {
 
@@ -44,6 +47,9 @@ export class DepotOperatorComponent implements OnInit, OnChanges {
 
     public createToken(data) {
       console.log(data);
+      this.QrScanner.qrResult = JSON.stringify(data);
      this.datacode = JSON.stringify(data);
+     this.QrScanner.taskList();
     }
+
 }

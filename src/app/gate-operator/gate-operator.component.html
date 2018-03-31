@@ -1,3 +1,5 @@
+<h1 class="text-center">Gate Operator</h1>
+<hr>
 <div class="container">
   <form class="form" [formGroup]="placeOrderForm" (ngSubmit)='createToken (placeOrderForm.value)' >
     <div class="form-group">
@@ -6,15 +8,15 @@
     </div>
     <div class="form-group">
     <label>total weight(in tonnes)</label>
-    <input type="number" formControlName="total_weight" name="total_weight" class="form-control">
+    <input type="number" formControlName="total_weight" name="total_weight" placeholder="Total Weight" class="form-control">
   </div>
   <div class="form-group">
     <label>truck number</label>
-    <input type="text" formControlName="vehicle_number" name="vehicle_number" class="form-control">
+    <input type="text" formControlName="vehicle_number" name="vehicle_number" placeholder="Vehicle" class="form-control">
   </div>
   <div class="form-group">
     <label>miller</label>
-    <input type="text" name="miller" formControlName="miller" class="form-control">
+    <input type="text" name="miller" formControlName="miller" placeholder="Miller Name" class="form-control">
     </div>
     <div class="text-center">
       <button type="submit" class="btn btn-primary">create token</button>

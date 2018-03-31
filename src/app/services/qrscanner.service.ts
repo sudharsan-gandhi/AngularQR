@@ -24,7 +24,7 @@ export class QrscannerService {
     this.availableDevices = cameras;
 
     if (cameras && cameras.length > 0) {
-        this.selectedDevice = cameras[1];
+        this.selectedDevice = cameras[0];
         this.cameraStarted = true;
     }
 }
@@ -54,6 +54,8 @@ reset() {
     console.log('resetted');
 }
 taskList() {
+    this.complete = [];
+    this.incomplete = [];
     const data = JSON.parse(this.qrResult);
     const prime = data['primeString'];
     console.log('in tasklist');
