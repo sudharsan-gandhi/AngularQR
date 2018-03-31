@@ -1,0 +1,39 @@
+<h1 class="text-center">Quality Analysis</h1>
+<hr>
+<div class="container">
+  <div class="text-center">
+<button class='btn btn-large btn-primary ' (click)='toggleScan()'>
+  show/hide qr scanner
+</button>
+</div>
+</div>
+<div *ngIf='showScanner' class='container' width="300" height="200">
+	<select (change)="QrScanner.onChange($event.target.value)">
+      <option *ngFor="let device of QrScanner.availableDevices" [value]="device.deviceId">{{ device.label }}</option>
+    </select>
+	<br>
+	<ngx-zxing [start]="QrScanner.cameraStarted" [device]="QrScanner.selectedDevice" (onCamsFound)="QrScanner.displayCameras($event)" (onScan)="QrScanner.handleQrCodeResult($event)" ></ngx-zxing>
+	<br>
+	<span>Qr Data: <strong>{{QrScanner.qrResult}}</strong></span>
+</div>
+<div class="container">
+  <form class="form" [formGroup]="QualityForm" (ngSubmit)='operatorUpdate (QualityForm.value)' >
+    <div class="form-group">
+      <label>Quality:</label>
+      <input formControlName="quality" class="form-control" name="quality" placeholder="Quality" type="number">
+    </div>
+    <div class="form-group">
+      <label>Description:</label>
+      <input formControlName="description" class="form-control" name="description" placeholder="Description" type="text">
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary">create token</button>
+    </div>
+  </form>
+  </div>
+  <div *ngIf= "datacode!=null">
+      <div class="form-group">
+        <p>data code </p>
+        <qr-code [value]='datacode' [size]="150"></qr-code>
+      </div>
+  </div>
