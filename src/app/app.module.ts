@@ -9,6 +9,7 @@ import { QRCodeModule } from 'angular2-qrcode';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QrscannerService } from './services/qrscanner.service';
 import { TodoComponent } from './todo/todo.component';
+import { QualityOperatorComponent } from './quality-operator/quality-operator.component';
 
 
 
@@ -18,7 +19,8 @@ import { TodoComponent } from './todo/todo.component';
     AppComponent,
     GateOperatorComponent,
     DepotOperatorComponent,
-    TodoComponent
+    TodoComponent,
+    QualityOperatorComponent
   ],
   imports: [
     BrowserModule,
